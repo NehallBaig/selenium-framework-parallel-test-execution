@@ -6,16 +6,15 @@ import org.testng.annotations.Test;
 
 import java.io.IOException;
 
-public class HomeScreenTest {
+public class GitHubTest {
 
     @Test
-    public void homeScreenTest() throws IOException {
+    public void gitHubTest() throws IOException {
         WebDriver driver= DriverManager.getDriver();
 
         HomeScreen homeScreen = new HomeScreen(driver);
-        homeScreen.navigateTo(Utility.getUrl());
+        homeScreen.navigateTo("https://github.com/");
 
-        homeScreen.clickGmailLink();
         DriverManager.closeDriver();
     }
 }
