@@ -18,7 +18,6 @@
         <classes>
             <class name="LoginTest"/>
             <class name="HomeTest"/>
-            <!--            <class name="HomeTest"/>-->
         </classes>
     </test>
 

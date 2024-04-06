@@ -5,11 +5,9 @@ import com.automation.pages.LoginScreen;
 import com.automation.utils.Utility;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
-import org.testng.annotations.AfterTest;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
-import java.sql.Driver;
 
 public class LoginTest {
 
