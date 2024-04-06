@@ -1,40 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="Suite" parallel="classes" thread-count="10">
+<suite name="Suite" parallel="tests" thread-count="10">
+    <test name="ParallelTest">
+        <classes>
+            <class name="LoginTest"/>
 
+        </classes>
+    </test>
 
-  <test name="ParallelTest">
-    <classes>
-      <class name="GitHubTest"/>
-      <class name="FacebookTest"/>
-      <class name="YahooTest"/>
-      <class name="GoogleTest"/>
-    </classes>
-  </test>
-
-
-
-
-
-
-
-<!--  <test name="FacebookTest">-->
-<!--    <classes>-->
-<!--      <class name="FacebookTest"/>-->
-<!--    </classes>-->
-<!--  </test>-->
-
-<!--  <test name="YahooTest">-->
-<!--    <classes>-->
-<!--      <class name="YahooTest"/>-->
-<!--    </classes>-->
-<!--  </test>-->
-
-<!--  <test name="GoogleTest">-->
-<!--    <classes>-->
-<!--      <class name="GoogleTest"/>-->
-<!--    </classes>-->
-<!--  </test>-->
+    <test name="HomeTest">
+        <groups>
+            <run>
+                <include name="login"/>
+                <include name="homeLogout"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="LoginTest"/>
+            <class name="HomeTest"/>
+        </classes>
+    </test>
 
 
 
@@ -42,4 +27,4 @@
 
         <!-- Suite -->
 
-<!--    -->
+        <!--    -->
