@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.time.Duration;
+import java.util.Objects;
 
 public class DriverManager {
 
@@ -43,8 +44,10 @@ public class DriverManager {
     }
 
     public static void closeDriver() {
-        driver.get().quit();
-        driver.remove();
+        if (Objects.nonNull(driver.get())) {
+            driver.get().quit();
+            driver.remove();
+        }
     }
 
 }

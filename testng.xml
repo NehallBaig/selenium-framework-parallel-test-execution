@@ -4,7 +4,6 @@
     <test name="ParallelTest">
         <classes>
             <class name="LoginTest"/>
-
         </classes>
     </test>
 
@@ -20,11 +19,4 @@
             <class name="HomeTest"/>
         </classes>
     </test>
-
-
-
 </suite>
-
-        <!-- Suite -->
-
-        <!--    -->
