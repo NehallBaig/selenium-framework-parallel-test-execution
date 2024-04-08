@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="Suite" parallel="tests" thread-count="10">
+<suite name="Regression" parallel="tests" thread-count="10">
   <listeners>
       <listener class-name="TestListener"/>
   </listeners>
@@ -8,8 +8,22 @@
     <test name="ParallelTest">
         <classes>
             <class name="LoginTest"/>
+            <class name="LoginTest2"/>
+            <class name="LoginTest3"/>
         </classes>
     </test>
+
+<!--    <test name="ParallelTest2">-->
+<!--        <classes>-->
+<!--            <class name="LoginTest2"/>-->
+<!--        </classes>-->
+<!--    </test>-->
+
+<!--    <test name="ParallelTest3">-->
+<!--        <classes>-->
+<!--            <class name="LoginTest3"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 
 <!--    <test name="HomeTest">-->
 <!--        <groups>-->
