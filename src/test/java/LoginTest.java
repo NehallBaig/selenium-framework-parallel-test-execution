@@ -25,7 +25,9 @@ public class LoginTest {
 
     @Test(priority = 1, groups = "login", alwaysRun = true)
     public void loginTest() throws IOException {
-        ExtentReportManager.createTest("login test","login test");
+       // ExtentReportManager.createTest("login test1","login test1");
+
+        ExtentReportManager.log("test1");
         PageObjectManager pageObjectManager = new PageObjectManager(DriverManager.getDriver());
         LoginScreen loginScreen = pageObjectManager.getLoginScreen();
 

@@ -14,7 +14,9 @@ public class ExtentReportManager {
 
     private static final Logger logger = LoggerFactory.getLogger(DriverManager.class);
     private static ExtentReports extentReport;
-    private static ExtentTest extentTest;
+
+    private static String extentReportPrefix;
+    private static ThreadLocal<ExtentTest> extentTest = new ThreadLocal<>();
 
     public static void setupReport(String testName) {
         extentReport = new ExtentReports();
@@ -25,31 +27,34 @@ public class ExtentReportManager {
 
     private static String getExtentReportPrefixName(String testName) {
         String date = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss").format(new Date());
-        return testName + "-" + date;
+        if(Objects.isNull(extentReportPrefix)){
+            extentReportPrefix = testName + "-" + date;
+        }
+        return extentReportPrefix;
     }
 
-    public static void createTest(String testName, String description) {
-        extentTest = extentReport.createTest(testName, description);
+    public synchronized static void createTest(String testName, String description) {
+        extentTest.set(extentReport.createTest(testName, description));
     }
 
     public static ExtentTest getTest() {
         try {
-            return extentTest;
+            return extentTest.get();
         } catch (NullPointerException e) {
             logger.error("Exception in getTest {}", e.getMessage());
         }
         return null;
     }
 
-    public static void log(String message) {
+    public synchronized static void log(String message) {
         Objects.requireNonNull(getTest()).info(message);
     }
 
-    public static void pass(String message) {
+    public synchronized static void pass(String message) {
         Objects.requireNonNull(getTest()).pass(message);
     }
 
-    public static void fail(String message) {
+    public synchronized static void fail(String message) {
         Objects.requireNonNull(getTest()).fail(message);
     }
 
