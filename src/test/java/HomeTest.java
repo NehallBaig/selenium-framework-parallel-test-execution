@@ -1,7 +1,7 @@
 import com.automation.core.DriverManager;
+import com.automation.core.ExtentReportManager;
 import com.automation.core.PageObjectManager;
 import com.automation.pages.HomeScreen;
-import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 
@@ -21,6 +21,7 @@ public class HomeTest {
         homeScreen = pageObjectManager.getHomeScreen();
         homeScreen.logout();
 
+        ExtentReportManager.pass("Successfully logout");
         DriverManager.closeDriver();
     }
 
