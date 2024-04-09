@@ -3,19 +3,19 @@ import org.testng.*;
 
 public class TestListener implements ITestListener, ISuiteListener {
 
-    public void onStart(ISuite suite){
+    public synchronized void onStart(ISuite suite){
         System.out.println("=======================================================================");
         System.out.println(suite.getName()+" Suite started");
         ExtentReportManager.setupReport(suite.getName());
     }
 
-    public void onTestStart(ITestResult result) {
+    public synchronized void onTestStart(ITestResult result) {
         System.out.println("=======================================================================");
         System.out.println("Started "+result.getName());
         ExtentReportManager.createTest(result.getName(), "");
     }
 
-    public void onFinish(ITestContext context) {
+    public synchronized void onFinish(ITestContext context) {
         System.out.println("=======================================================================");
         System.out.println("Finished "+context.getName());
         ExtentReportManager.flushReport();
