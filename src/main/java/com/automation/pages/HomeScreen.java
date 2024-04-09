@@ -23,7 +23,7 @@ public class HomeScreen extends AbstractScreen{
 
     public void logout(){
         clickMenuIcon();
-        Utility.waitForSomeTime(5);
+        Utility.waitForSomeTime(3);
         Utility.clickButton(logout);
     }
 }

@@ -37,7 +37,7 @@ public class ExtentReportManager {
         extentTest.set(extentReport.createTest(testName, description));
     }
 
-    public static ExtentTest getTest() {
+    public synchronized static ExtentTest getTest() {
         try {
             return extentTest.get();
         } catch (NullPointerException e) {
