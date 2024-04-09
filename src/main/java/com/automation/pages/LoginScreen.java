@@ -14,7 +14,6 @@ public class LoginScreen extends AbstractScreen {
 
     private static final Logger logger = LoggerFactory.getLogger(DriverManager.class);
 
-
     @FindBy(id = "user-name")
     WebElement usernameField;
 
