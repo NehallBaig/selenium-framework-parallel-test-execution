@@ -16,6 +16,7 @@
         <testng>7.9.0</testng>
         <extentReport>5.1.1</extentReport>
         <log4j>1.7.32</log4j>
+        <commonIO>2.16.1</commonIO>
     </properties>
 
     <dependencies>
@@ -45,5 +46,12 @@
             <artifactId>extentreports</artifactId>
             <version>${extentReport}</version>
         </dependency>
+
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>${commonIO}</version>
+        </dependency>
+
     </dependencies>
 </project>

@@ -9,6 +9,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
+import java.util.Objects;
 
 /**
  * This class contains a test method to validate the maximum product price.
@@ -48,8 +49,8 @@ public class ProductTest {
 
         System.out.println("Max Price " +maxPrice);
 
-        if(validatePrice){
-            ExtentReportManager.pass("Max price is matched. Expected: " + maxPrice );
+        if (validatePrice) {
+            ExtentReportManager.pass("Max price is matched. Expected: " + maxPrice);
         } else {
             ExtentReportManager.fail("Max price is not matched");
         }

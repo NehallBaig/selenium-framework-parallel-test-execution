@@ -4,6 +4,7 @@
     <listeners>
         <listener class-name="com.automation.listeners.TestListener"/>
         <listener class-name="com.automation.listeners.AnnotationTransformer"/>
+        <listener class-name="com.automation.listeners.InvokedMethodListener"/>
     </listeners>
 
     <test name="LoginTest">

@@ -1,18 +1,28 @@
 package com.automation.utils;
 
 import com.automation.core.DriverManager;
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Objects;
 import java.util.Properties;
 
 public class Utility {
 
     private static Properties prop;
+
+    private static String screenshotPath;
+
     private static final Logger logger = LoggerFactory.getLogger(DriverManager.class);
 
     public static WebDriver getDriver() throws IOException {
@@ -42,6 +52,22 @@ public class Utility {
            logger.error("Failed to wait: {}", e.getMessage());
         }
     }
+
+    public synchronized static void takeScreenshot(String testName) throws IOException {
+        File screenshotFile = ((TakesScreenshot) DriverManager.getDriver()).getScreenshotAs(OutputType.FILE);
+        screenshotPath = System.getProperty("user.dir") + "/screenshots/" + testName + "-" + dateTime() + ".png";
+        File DestFile = new File(screenshotPath);
+        FileUtils.copyFile(screenshotFile, DestFile);
+    }
+
+    private static String dateTime() {
+        return new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss").format(new Date());
+    }
+
+    public static String getScreenshotPath() {
+        return screenshotPath;
+    }
+
     public static String getPropertyValue(String key) throws IOException {
         try {
             return getProperties().getProperty(key);
