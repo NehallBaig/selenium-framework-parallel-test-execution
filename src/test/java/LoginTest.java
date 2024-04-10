@@ -12,7 +12,7 @@ import java.io.IOException;
 
 public class LoginTest {
 
-    @Test(dataProvider = "loginData", dataProviderClass = LoginData.class, enabled = false)
+    @Test(priority = 50, dataProvider = "loginData", dataProviderClass = LoginData.class)
     public void multiLoginTest(String username, String password) throws IOException {
         PageObjectManager pageObjectManager = new PageObjectManager(DriverManager.getDriver());
         LoginScreen loginScreen = pageObjectManager.getLoginScreen();
@@ -25,7 +25,7 @@ public class LoginTest {
         ExtentReportManager.pass(username+" successfully login");
     }
 
-    @Test(priority = 1, groups = "login", alwaysRun = true)
+    @Test(priority = 1, groups = "login")
     public void loginTest() throws IOException {
         PageObjectManager pageObjectManager = new PageObjectManager(DriverManager.getDriver());
         LoginScreen loginScreen = pageObjectManager.getLoginScreen();

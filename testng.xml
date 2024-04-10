@@ -2,7 +2,8 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="Regression" parallel="tests" thread-count="10">
     <listeners>
-        <listener class-name="TestListener"/>
+        <listener class-name="com.automation.listeners.TestListener"/>
+        <listener class-name="com.automation.listeners.AnnotationTransformer"/>
     </listeners>
 
     <test name="LoginTest">
@@ -11,7 +12,13 @@
         </classes>
     </test>
 
-    <test name="HomeTest">
+    <test name="ProductTest">
+        <classes>
+            <class name="ProductTest"/>
+        </classes>
+    </test>
+
+    <test name="DependentTestLoginAndHomeTest">
         <groups>
             <run>
                 <include name="login"/>

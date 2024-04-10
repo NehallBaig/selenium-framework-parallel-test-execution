@@ -1,3 +1,6 @@
+package com.automation.listeners;
+
+import com.automation.core.DriverManager;
 import com.automation.core.ExtentReportManager;
 import org.testng.*;
 
@@ -15,9 +18,15 @@ public class TestListener implements ITestListener, ISuiteListener {
         ExtentReportManager.createTest(result.getName(), "");
     }
 
+    public synchronized void onTestFailure(ITestResult result) {
+        DriverManager.closeDriver();
+    }
+
+
     public synchronized void onFinish(ITestContext context) {
         System.out.println("=======================================================================");
         System.out.println("Finished "+context.getName());
         ExtentReportManager.flushReport();
+        DriverManager.closeDriver();
     }
 }

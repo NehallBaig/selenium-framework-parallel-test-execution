@@ -12,7 +12,7 @@ public class HomeTest {
     private HomeScreen homeScreen;
     private LoginTest loginTest;
 
-    @Test(priority = 2, groups="homeLogout", dependsOnGroups = "login")
+    @Test(priority = 100, groups="homeLogout", dependsOnGroups = "login")
     public void logoutTest() throws IOException {
         loginTest = new LoginTest();
         loginTest.loginTest();
