@@ -6,6 +6,8 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -13,6 +15,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.time.Duration;
 import java.util.Date;
 import java.util.Objects;
 import java.util.Properties;
@@ -52,6 +55,29 @@ public class Utility {
            logger.error("Failed to wait: {}", e.getMessage());
         }
     }
+
+    public static boolean waitForWebElementClickable(WebDriver driver, WebElement elements, int timeOuts) {
+        try {
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeOuts));
+            wait.until(ExpectedConditions.elementToBeClickable(elements));
+            return true;
+        } catch (Exception e) {
+            System.out.println("Element was not clickable within the specified timeout period");
+            return false;
+        }
+    }
+
+    public static boolean waitForWebElement(WebDriver driver, WebElement element, int timeOuts) {
+        try {
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeOuts));
+            wait.until(ExpectedConditions.visibilityOf(element));
+            return true;
+        } catch (Exception e) {
+            System.out.println("Element was not visible within the specified timeout period");
+            return false;
+        }
+    }
+
 
     public synchronized static void takeScreenshot(String testName) throws IOException {
         File screenshotFile = ((TakesScreenshot) DriverManager.getDriver()).getScreenshotAs(OutputType.FILE);

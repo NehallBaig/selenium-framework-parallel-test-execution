@@ -21,6 +21,9 @@ public class InvokedMethodListener implements IInvokedMethodListener {
                 System.out.println(Utility.getScreenshotPath());
                 Objects.requireNonNull(ExtentReportManager.getTest()).addScreenCaptureFromPath(Utility.getScreenshotPath());
 
+                // Dynamic logging for failed scenario
+                // In case of test failed, without handle failed log block
+                Objects.requireNonNull(ExtentReportManager.getTest()).fail("Failed");
             } catch (IOException e) {
                 throw new RuntimeException(e);
             } finally {
