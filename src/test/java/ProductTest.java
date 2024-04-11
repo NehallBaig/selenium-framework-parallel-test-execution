@@ -33,6 +33,17 @@ public class ProductTest {
 
     private static double maxPrice = 51.99;
 
+    @Test
+    public void validateProductName() throws IOException {
+        LoginTest loginTest = new LoginTest();
+        loginTest.loginTest();
+
+        PageObjectManager pageObjectManager = new PageObjectManager(DriverManager.getDriver());
+        ProductsScreen productsScreen = pageObjectManager.getProductScreen();
+
+        Assert.assertTrue(productsScreen.productLabelIsDisplayed());
+    }
+
     @Test(priority = 150)
     public void validateMaxProductPrice() throws IOException {
         LoginTest loginTest = new LoginTest();
