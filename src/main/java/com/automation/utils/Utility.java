@@ -7,6 +7,7 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,6 +18,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.util.Date;
+import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.Properties;
 
@@ -78,6 +80,21 @@ public class Utility {
         }
     }
 
+    public static boolean selectDropDownByVisibleText(WebElement webElement, String text) {
+        boolean status = false;
+        try {
+            Select select = new Select(webElement);
+            WebElement option = select.getFirstSelectedOption();
+            if (!option.getText().equalsIgnoreCase(text)) {
+                select.selectByVisibleText(text);
+            }
+            status = true; // Already selected the desired option
+        } catch (NoSuchElementException e) {
+            System.out.println("Element not found: " + webElement + ". Unable to select drop-down value.");
+            logger.error("Element not found: {}. Unable to select drop-down value.",   webElement );
+        }
+        return status;
+    }
 
     public synchronized static void takeScreenshot(String testName) throws IOException {
         File screenshotFile = ((TakesScreenshot) DriverManager.getDriver()).getScreenshotAs(OutputType.FILE);
