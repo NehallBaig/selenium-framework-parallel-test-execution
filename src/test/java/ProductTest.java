@@ -1,14 +1,18 @@
 import com.automation.core.DriverManager;
 import com.automation.core.ExtentReportManager;
 import com.automation.core.PageObjectManager;
+import com.automation.data.SortProductData;
 import com.automation.listeners.RetryAnalyzer;
 import com.automation.pages.LoginScreen;
 import com.automation.pages.ProductsScreen;
 import com.automation.utils.Utility;
 import org.testng.Assert;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -32,6 +36,20 @@ import java.util.Objects;
 public class ProductTest {
 
     private static double maxPrice = 51.99;
+
+    @Test(dataProviderClass = SortProductData.class, dataProvider = "sortingCriteria")
+    public void validateSortingProduct(String sortingCriteria) throws IOException {
+        LoginTest loginTest = new LoginTest();
+        loginTest.loginTest();
+
+        PageObjectManager pageObjectManager = new PageObjectManager(DriverManager.getDriver());
+        ProductsScreen productsScreen = pageObjectManager.getProductScreen();
+
+        System.out.println("Sorting products by: " + sortingCriteria);
+
+        Assert.assertTrue(productsScreen.selectSortingFilter(sortingCriteria));
+        Assert.assertTrue(productsScreen.validateSortingProduct(sortingCriteria));
+    }
 
     @Test
     public void validateProductName() throws IOException {
