@@ -24,6 +24,9 @@ public class ProductsScreen extends AbstractScreen {
     @FindBy(className = "inventory_item_price")
     List<WebElement> productPriceList;
 
+    @FindBy(className = "inventory_item_name")
+    List<WebElement> productNameList;
+    
 
     public ProductsScreen(WebDriver driver) {
         super(driver);
@@ -44,11 +47,13 @@ public class ProductsScreen extends AbstractScreen {
 
     public boolean validateSortingProduct(String sortingCriteria) {
         List<Double> prices = getProductPrices();
+        List<String> names = getProductsName();
 
         // Verify that the products are sorted correctly
         return switch (sortingCriteria) {
             case "Price (low to high)" -> isSortedAscending(prices);
             case "Price (high to low)" -> isSortedDescending(prices);
+            case "Name (A to Z)" -> isSortedByNameAscending(names);
             default -> {
                 System.out.println("Unsupported sorting criteria: " + sortingCriteria);
                 yield false;
@@ -70,6 +75,25 @@ public class ProductsScreen extends AbstractScreen {
     private boolean isSortedDescending(List<Double> values) {
         for (int i = 0; i < values.size() - 1; i++) {
             if (values.get(i) < values.get(i + 1)) {
+                return false;
+            }
+        }
+        return true;
+    }
+    private List<String> getProductsName() {
+        List<String> productsName = new ArrayList<>();
+        for (WebElement productElement : productNameList) {
+            String productName = productElement.getText();
+            System.out.println(productName);
+            productsName.add(productName);
+        }
+        return productsName;
+    }
+
+    public static boolean isSortedByNameAscending(List<String> values) {
+        for (int i = 0; i < values.size() - 1; i++) {
+            System.out.println(values.get(i).compareToIgnoreCase(values.get(i + 1)));
+            if (values.get(i).compareToIgnoreCase(values.get(i + 1)) > 0) {
                 return false;
             }
         }

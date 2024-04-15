@@ -8,9 +8,8 @@ public class SortProductData {
     public static Object[][] getSortingCriteria() {
         return new Object[][] {
                 {"Price (low to high)"},
-                {"Price (high to low)"}
-
-//                {"Name (A to Z)"},
+                {"Price (high to low)"},
+                {"Name (A to Z)"},
 //                {"Name (Z to A)"}
         };
     }
