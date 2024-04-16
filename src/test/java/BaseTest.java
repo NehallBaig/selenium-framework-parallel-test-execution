@@ -8,6 +8,7 @@ import java.io.IOException;
 
 public class BaseTest {
 
+    //This class has no use
     private PageObjectManager pageObjectManager;
     protected WebDriver driver;
 

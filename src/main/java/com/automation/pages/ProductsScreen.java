@@ -26,7 +26,7 @@ public class ProductsScreen extends AbstractScreen {
 
     @FindBy(className = "inventory_item_name")
     List<WebElement> productNameList;
-    
+
 
     public ProductsScreen(WebDriver driver) {
         super(driver);
@@ -39,6 +39,8 @@ public class ProductsScreen extends AbstractScreen {
     public boolean selectSortingFilter(String text) {
         if (Utility.waitForWebElement(driver, productFilterDropDown, 5)) {
             Utility.selectDropDownByVisibleText(productFilterDropDown, text);
+
+            // use wait to demonstrate test
             Utility.waitForSomeTime(5);
             return true;
         }
@@ -46,19 +48,23 @@ public class ProductsScreen extends AbstractScreen {
     }
 
     public boolean validateSortingProduct(String sortingCriteria) {
-        List<Double> prices = getProductPrices();
-        List<String> names = getProductsName();
+        if (selectSortingFilter(sortingCriteria)) {
+            List<Double> prices = getProductPrices();
+            List<String> names = getProductsName();
 
-        // Verify that the products are sorted correctly
-        return switch (sortingCriteria) {
-            case "Price (low to high)" -> isSortedAscending(prices);
-            case "Price (high to low)" -> isSortedDescending(prices);
-            case "Name (A to Z)" -> isSortedByNameAscending(names);
-            default -> {
-                System.out.println("Unsupported sorting criteria: " + sortingCriteria);
-                yield false;
-            }
-        };
+            // Verify that the products are sorted correctly
+            return switch (sortingCriteria) {
+                case "Price (low to high)" -> isSortedAscending(prices);
+                case "Price (high to low)" -> isSortedDescending(prices);
+                case "Name (A to Z)" -> isSortedByNameAscending(names);
+                case "Name (Z to A)" -> isSortedByNameDescending(names);
+                default -> {
+                    System.out.println("Unsupported sorting criteria: " + sortingCriteria);
+                    yield false;
+                }
+            };
+        }
+        return false;
     }
 
     // Need to refactor
@@ -80,6 +86,7 @@ public class ProductsScreen extends AbstractScreen {
         }
         return true;
     }
+
     private List<String> getProductsName() {
         List<String> productsName = new ArrayList<>();
         for (WebElement productElement : productNameList) {
@@ -94,6 +101,16 @@ public class ProductsScreen extends AbstractScreen {
         for (int i = 0; i < values.size() - 1; i++) {
             System.out.println(values.get(i).compareToIgnoreCase(values.get(i + 1)));
             if (values.get(i).compareToIgnoreCase(values.get(i + 1)) > 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static boolean isSortedByNameDescending(List<String> values) {
+        for (int i = 0; i < values.size() - 1; i++) {
+            System.out.println(values.get(i).compareToIgnoreCase(values.get(i + 1)));
+            if (values.get(i).compareToIgnoreCase(values.get(i + 1)) < 0) {
                 return false;
             }
         }

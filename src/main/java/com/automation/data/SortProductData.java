@@ -10,7 +10,7 @@ public class SortProductData {
                 {"Price (low to high)"},
                 {"Price (high to low)"},
                 {"Name (A to Z)"},
-//                {"Name (Z to A)"}
+                {"Name (Z to A)"}
         };
     }
 }
