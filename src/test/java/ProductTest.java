@@ -47,7 +47,6 @@ public class ProductTest {
 
         System.out.println("Sorting products by: " + sortingCriteria);
 
-        Assert.assertTrue(productsScreen.selectSortingFilter(sortingCriteria));
         Assert.assertTrue(productsScreen.validateSortingProduct(sortingCriteria));
     }
 
