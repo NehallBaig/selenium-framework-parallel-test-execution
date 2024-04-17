@@ -3,6 +3,7 @@
 <suite name="Regression" parallel="tests" thread-count="10">
     <listeners>
         <listener class-name="com.automation.listeners.TestListener"/>
+        <listener class-name="com.automation.listeners.SuiteListener"/>
         <listener class-name="com.automation.listeners.AnnotationTransformer"/>
         <listener class-name="com.automation.listeners.InvokedMethodListener"/>
     </listeners>
@@ -19,16 +20,26 @@
         </classes>
     </test>
 
-    <test name="DependentTestLoginAndHomeTest">
-        <groups>
-            <run>
-                <include name="login"/>
-                <include name="homeLogout"/>
-            </run>
-        </groups>
+    <test name="HomeTest">
         <classes>
-            <class name="LoginTest"/>
             <class name="HomeTest"/>
         </classes>
     </test>
+
+
+    <!-- Working on Dependency    -->
+    <!--
+        <test name="DependentTestLoginAndHomeTest">
+            <groups>
+                <run>
+                    <include name="login"/>
+                    <include name="homeLogout"/>
+                </run>
+            </groups>
+            <classes>
+                <class name="LoginTest"/>
+                <class name="HomeTest"/>
+            </classes>
+        </test>
+    -->
 </suite>

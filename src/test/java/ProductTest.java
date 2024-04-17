@@ -23,7 +23,8 @@ import java.util.Objects;
  * - It's initialized with an initial value of $51.99.
  * - During test execution, the maxPrice is decremented by 1 for each subsequent test run.
  * - This decrement is used to simulate a scenario where the expected maximum price decreases with each retry.
- * - Eventually, after 2 test runs (due to the retry analyzer), the maxPrice will reach $48.99.
+ * - Eventually, after 3 test runs (due to the retry analyzer), the maxPrice will reach $48.99.
+ * - In time of writing testcase, Product Max price is $48.99
  *
  * Purpose of the Test Method (validateMaxProductPrice):
  * - This method validates whether the maximum product price matches the expected maxPrice.
@@ -72,17 +73,15 @@ public class ProductTest {
         Utility.waitForSomeTime(3);
         boolean validatePrice = productsScreen.validateMaxProductPrice(maxPrice);
 
-        // Decrement maxPrice for subsequent test runs
-        maxPrice--;
-
         System.out.println("Max Price " +maxPrice);
 
         if (validatePrice) {
-            ExtentReportManager.pass("Max price is matched. Expected: " + maxPrice);
+            ExtentReportManager.pass("Expected Max price '$48.99' is matched with Actual' $" + maxPrice+"'");
         } else {
-            ExtentReportManager.fail("Max price is not matched");
+            ExtentReportManager.fail("Expected Max price '$48.99' is not matched with Actual' $" + maxPrice+"'");
         }
-
+        // Decrement maxPrice for subsequent test runs
+        maxPrice--;
         Assert.assertTrue(validatePrice);
     }
 }
