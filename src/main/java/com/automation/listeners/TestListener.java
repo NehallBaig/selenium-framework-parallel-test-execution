@@ -8,13 +8,7 @@ import org.testng.*;
 import java.io.IOException;
 import java.util.Objects;
 
-public class TestListener implements ITestListener, ISuiteListener {
-
-    public synchronized void onStart(ISuite suite){
-        System.out.println("=======================================================================");
-        System.out.println(suite.getName()+" Suite started");
-        ExtentReportManager.setupReport(suite.getName());
-    }
+public class TestListener implements ITestListener {
 
     public synchronized void onTestStart(ITestResult result) {
         System.out.println("=======================================================================");

@@ -41,7 +41,7 @@ public class ProductsScreen extends AbstractScreen {
             Utility.selectDropDownByVisibleText(productFilterDropDown, text);
 
             // use wait to demonstrate test
-            Utility.waitForSomeTime(5);
+            //Utility.waitForSomeTime(3);
             return true;
         }
         return false;
