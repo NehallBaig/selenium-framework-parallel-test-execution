@@ -36,7 +36,7 @@ import java.util.Objects;
  */
 public class ProductTest {
 
-    private static double maxPrice = 51.99;
+    private static double maxPrice = 51.99; // 60.99;
 
     @Test(dataProviderClass = SortProductData.class, dataProvider = "sortingCriteria")
     public void validateSortingProduct(String sortingCriteria) throws IOException {

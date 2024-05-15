@@ -20,8 +20,8 @@ import org.testng.ITestResult;
  */
 public class RetryAnalyzer implements IRetryAnalyzer {
 
-    int counter = 0;
-    static final int retryLimit = 2;
+    private static int counter = 0;
+    private static final int retryLimit = 2;
 
     @Override
     public boolean retry(ITestResult iTestResult) {
@@ -30,5 +30,9 @@ public class RetryAnalyzer implements IRetryAnalyzer {
             return true;
         }
         return false;
+    }
+
+    public static int getTestCount(){
+        return counter;
     }
 }
