@@ -8,6 +8,8 @@ import org.slf4j.LoggerFactory;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class ExtentReportManager {
@@ -17,6 +19,9 @@ public class ExtentReportManager {
 
     private static String extentReportPrefix;
     private static ThreadLocal<ExtentTest> extentTest = new ThreadLocal<>();
+
+    // Not functional, R&D
+    public static Map<String, Boolean> testStatusMap = new HashMap<>();
 
     public static void setupReport(String testName) {
         extentReport = new ExtentReports();
@@ -35,6 +40,10 @@ public class ExtentReportManager {
 
     public synchronized static void createTest(String testName, String description) {
         extentTest.set(extentReport.createTest(testName, description));
+    }
+
+    public synchronized static void removeTest(String testName) {
+        extentReport.removeTest(testName);
     }
 
     public synchronized static ExtentTest getTest() {
